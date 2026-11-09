@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manajemen Pesanan - Admin FIXIN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+
+  <div id="adminOrdersPage">
+
+    <header class="navbar admin-topbar">
+      <div class="container">
+        <a href="admin-dashboard.html" class="logo">FIX<span>IN</span> <span style="font-size:0.7rem; font-weight:500; opacity:0.7;">Admin</span></a>
+        <nav class="nav-links">
+          <a href="admin-dashboard.html">Dashboard</a>
+          <a href="admin-orders.html" class="active">Pesanan</a>
+          <a href="admin-products.html">Produk</a>
+          <a href="admin-reports.html">Laporan</a>
+        </nav>
+        <a href="#" id="logoutBtn" class="btn btn-outline">Keluar<span class="admin-welcome-wrap"> (<span id="adminWelcome">Admin</span>)</span></a>
+        <button class="nav-toggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <section class="admin-content">
+      <div class="container">
+        <a href="admin-dashboard.html" class="back-btn back-btn-dark" onclick="return goBack('admin-dashboard.html')">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Kembali ke Dashboard
+        </a>
+        <div class="admin-page-head">
+          <div>
+            <span class="eyebrow">Manajemen Pesanan</span>
+            <h1>Semua Pesanan</h1>
+            <p>Cari, filter, cek detail antar/jemput, dan perbarui status servis tiap order di sini.</p>
+          </div>
+        </div>
+
+        <div class="admin-filters">
+          <input type="search" id="orderSearchInput" placeholder="Cari Order ID, kode servis, atau nama customer..." />
+          <select id="filterServiceStatus">
+            <option value="">Semua Status Servis</option>
+          </select>
+          <select id="filterPaymentStatus">
+            <option value="">Semua Status Pembayaran</option>
+          </select>
+        </div>
+
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Kode Servis</th>
+                <th>Customer</th>
+                <th>Layanan</th>
+                <th>Metode</th>
+                <th>Tanggal Servis</th>
+                <th>Total</th>
+                <th>Status Servis</th>
+                <th>Pembayaran</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTableBody"></tbody>
+          </table>
+          <p class="admin-table-empty" id="ordersEmptyState" style="display:none;">Tidak ada order yang cocok dengan pencarian/filter ini.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal Detail Order (admin) -->
+    <div class="modal-backdrop" id="adminOrderDetailBackdrop">
+      <div class="modal-card">
+        <div class="modal-head">
+          <h3>Detail Order</h3>
+          <button type="button" class="modal-close" id="closeAdminOrderDetail" aria-label="Tutup">&times;</button>
+        </div>
+
+        <div class="order-summary">
+          <h4>Kode Servis: <span id="adminDetailKode">-</span></h4>
+          <div class="summary-row"><span>Customer</span><span id="adminDetailCustomer">-</span></div>
+          <div class="summary-row"><span>Kontak</span><span id="adminDetailKontak">-</span></div>
+          <div class="summary-row"><span>Layanan</span><span id="adminDetailLayanan">-</span></div>
+          <div class="summary-row"><span>Perangkat</span><span id="adminDetailPerangkat">-</span></div>
+          <div class="summary-row"><span>Keluhan</span><span id="adminDetailKeluhan">-</span></div>
+          <div class="summary-row"><span>Tanggal Servis</span><span id="adminDetailTanggal">-</span></div>
+          <div class="summary-row"><span>Metode</span><span id="adminDetailMetode">-</span></div>
+          <div class="summary-row hidden" id="adminDetailAlamatRow"><span>Alamat Jemput</span><span id="adminDetailAlamat">-</span></div>
+          <div class="summary-row"><span>Biaya Layanan</span><span id="adminDetailSubtotal">Rp 0</span></div>
+          <div class="summary-row"><span>Biaya Jemput</span><span id="adminDetailOngkir">Rp 0</span></div>
+          <div class="summary-row total"><span>Total</span><span id="adminDetailTotal">Rp 0</span></div>
+          <div class="summary-row"><span>Order Dibuat</span><span id="adminDetailDibuat">-</span></div>
+        </div>
+
+        <p class="status-note">
+          Status pembayaran: <span class="status-badge" id="adminDetailStatusBayar">-</span>
+        </p>
+
+        <div class="field" style="margin-top:16px;">
+          <label for="adminDetailStatusSelect">Status Servis</label>
+          <select class="order-detail-select" id="adminDetailStatusSelect"></select>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-outline-dark" id="cancelAdminOrderDetail">Tutup</button>
+          <button type="button" class="btn btn-teal" id="saveAdminOrderStatus">Simpan Status</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+  </div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/admin-orders.js"></script>
+</body>
+</html>

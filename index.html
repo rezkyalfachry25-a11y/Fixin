@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FIXIN - Servis Laptop & HP Terpercaya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">FIX<span>IN</span></a>
+      <nav class="nav-links">
+        <a href="#beranda" class="active">Beranda</a>
+        <a href="#layanan">Layanan</a>
+        <a href="booking.html">Booking</a>
+        <a href="tracking.html">Lacak Servis</a>
+        <a href="#tentang">Tentang</a>
+      </nav>
+      <span class="nav-auth" id="navAuthArea"></span>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="beranda">
+    <div class="container">
+      <div class="hero-top">
+        <div class="hero-text">
+          <span class="eyebrow">Mitra servis terpercaya</span>
+          <h1>Servis laptop dan HP <span class="accent">cepat</span> serta terpercaya.</h1>
+          <p>Kami menyediakan layanan servis laptop dan HP yang cepat dan andal untuk mengembalikan perangkatmu ke kondisi terbaik. Layar retak, baterai bermasalah, atau kendala software, semua kami tangani.</p>
+          <div class="hero-actions">
+            <a href="#tentang" class="btn btn-outline">Tentang Kami</a>
+            <a href="#layanan" class="btn btn-teal">Lihat Layanan</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick booking CTA. Dulu di sini ada form booking cepat sendiri
+           (nama/email/hp/layanan/tanggal) yang langsung disimpan ke
+           localStorage pakai skema data lama (kode, status, dibuatPada).
+           Itu beda total dari skema order booking.html (serviceCode,
+           serviceStatus, subtotal, total, userId, dst), jadi order dari
+           form ini TIDAK PERNAH bisa tampil benar di dashboard user,
+           checkout, invoice, atau ikut pembayaran Midtrans - field-nya
+           tidak cocok sama sekali. Makanya diganti jadi tombol ke
+           booking.html supaya semua booking lewat satu alur yang sama,
+           login-gated, dan konsisten muncul di riwayat pesanan. -->
+      <div class="quick-booking" style="display:block; grid-template-columns:none;">
+        <h3 style="color:#fff; margin-bottom:8px;">Siap servis perangkatmu?</h3>
+        <p style="color:#eafaf7; margin-bottom:18px;">Booking lewat form lengkap kami, pilih metode antar/jemput, lalu bayar langsung online.</p>
+        <a href="booking.html" class="btn btn-navy">Booking Sekarang</a>
+      </div>
+      <div class="hero-spacer"></div>
+    </div>
+  </section>
+
+  <!-- FEATURE CARDS -->
+  <section class="section section-tint-teal">
+    <div class="container">
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </div>
+          <h3>Servis Elektronik Terbaik</h3>
+          <p>Layanan servis untuk semua perangkat, mulai dari HP sampai laptop, dikerjakan oleh teknisi berpengalaman.</p>
+          <div class="step-no">01</div>
+        </div>
+        <div class="feature-card">
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Tim Berpengalaman</h3>
+          <p>Teknisi kami sudah menangani ratusan kasus servis, mulai dari kerusakan ringan hingga yang cukup rumit.</p>
+          <div class="step-no">02</div>
+        </div>
+        <div class="feature-card">
+          <div class="icon-circle">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Garansi Servis Aman</h3>
+          <p>Setiap perbaikan yang kami lakukan disertai garansi, jadi kamu bisa lebih tenang setelah servis selesai.</p>
+          <div class="step-no">03</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAYANAN -->
+  <section class="section section-bg" id="layanan">
+    <div class="container">
+      <div class="section-head-row">
+        <div>
+          <span class="eyebrow">Layanan</span>
+          <h2 class="section-heading">Layanan servis yang kami sediakan</h2>
+          <p class="section-desc">Pilihan layanan servis untuk HP, laptop, dan tablet dengan harga transparan.</p>
+        </div>
+      </div>
+
+      <div class="service-grid" id="catalogGrid">
+        <!-- Diisi otomatis dari fixin_products (produk aktif saja) lewat js/products.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- TENTANG -->
+  <section class="section section-tint-navy" id="tentang">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-visual">
+          <div class="img-box">
+            <img src="img/tentang1.jpg" alt="Tim FIXIN melayani perbaikan perangkat" />
+          </div>
+          <div class="badge-years">
+            <strong>10+</strong>
+            <span>Tahun Pengalaman</span>
+          </div>
+        </div>
+        <div class="about-text">
+          <span class="eyebrow">Tentang Kami</span>
+          <h2 class="section-heading">Kami menyediakan servis berkualitas untuk perangkatmu</h2>
+          <p class="section-desc">FIXIN menangani perbaikan HP, laptop, dan tablet dengan proses kerja yang jelas dan harga transparan, sehingga pelanggan tahu persis apa yang mereka bayar.</p>
+
+          <div class="about-points">
+            <div class="about-point">
+              <div class="icon-circle-sm">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 3 6v6c0 5 4 9 9 10 5-1 9-5 9-10V6z"/></svg>
+              </div>
+              <div>
+                <h4>Servis Aman & Bergaransi</h4>
+                <p>Setiap perbaikan dicatat dan disertai garansi sesuai jenis layanan.</p>
+              </div>
+            </div>
+            <div class="about-point">
+              <div class="icon-circle-sm">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div>
+                <h4>Proses Cepat</h4>
+                <p>Sebagian besar servis ringan selesai dalam hitungan jam, bukan hari.</p>
+              </div>
+            </div>
+            <div class="about-point">
+              <div class="icon-circle-sm">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <div>
+                <h4>Harga Transparan</h4>
+                <p>Estimasi biaya disampaikan di awal, tanpa biaya tersembunyi.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-cta">
+    <div class="container">
+      <h2>Perangkatmu bermasalah?</h2>
+      <p>Booking servis sekarang dan lacak progresnya kapan saja lewat kode servis.</p>
+      <a href="booking.html" class="btn btn-navy">Booking Sekarang</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <span class="footer-logo">FIX<span style="color:#17b3a3">IN</span></span>
+          <p>Layanan servis laptop dan HP dengan proses cepat, transparan, dan bergaransi.</p>
+        </div>
+        <div>
+          <h4>Halaman</h4>
+          <ul>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="#layanan">Layanan</a></li>
+            <li><a href="booking.html">Booking</a></li>
+            <li><a href="tracking.html">Lacak Servis</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Layanan</h4>
+          <ul>
+            <li><a href="#layanan">Servis HP</a></li>
+            <li><a href="#layanan">Servis Laptop</a></li>
+            <li><a href="#layanan">Servis Tablet</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Kontak</h4>
+          <ul>
+            <li>WhatsApp: 0812-3456-7890</li>
+            <li>Email: halo@fixin.id</li>
+            <li>Jam operasional: 09.00 - 20.00</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 FIXIN. lorem ipsum dolor sit amet.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/booking.js"></script>
+</body>
+</html>

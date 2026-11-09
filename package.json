@@ -1,0 +1,6 @@
+{
+  "name": "fixin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "FIXIN - website jasa servis elektronik (tugas akhir frontend + 1 endpoint serverless untuk Midtrans Snap Token)"
+}

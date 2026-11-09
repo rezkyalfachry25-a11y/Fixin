@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laporan Transaksi - Admin FIXIN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+
+  <style>
+    /* ---------- Gaya khusus halaman Laporan (tidak mengubah dashboard.css) ---------- */
+
+    .report-filters {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+
+    .report-filters .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .report-filters label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .report-filters select,
+    .report-filters input[type="date"] {
+      border: 1px solid var(--gray-border);
+      border-radius: var(--radius-sm);
+      padding: 11px 14px;
+      font-family: "Inter", sans-serif;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+      background: var(--white);
+      min-width: 190px;
+    }
+
+    .report-filters select:focus,
+    .report-filters input[type="date"]:focus {
+      outline: none;
+      border-color: var(--teal);
+    }
+
+    .report-period-range {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 26px;
+    }
+
+    .report-period-range strong {
+      color: var(--text-dark);
+    }
+
+    .stat-cards.stat-cards-5 {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    @media (max-width: 1100px) {
+      .stat-cards.stat-cards-5 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 620px) {
+      .stat-cards.stat-cards-5 {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .report-service-wrap {
+      margin-bottom: 32px;
+    }
+
+    /* ---------- Responsif (HP & tablet kecil) ---------- */
+    @media (max-width: 680px) {
+      .admin-page-head {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .admin-page-head #exportReportBtn {
+        width: 100%;
+      }
+
+      .report-filters {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+
+      .report-filters .field {
+        width: 100%;
+      }
+
+      .report-filters select,
+      .report-filters input[type="date"] {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .report-period-range {
+        margin-bottom: 20px;
+      }
+
+      .admin-table {
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .stat-cards.stat-cards-5 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="adminReportsPage">
+
+    <header class="navbar admin-topbar">
+      <div class="container">
+        <a href="admin-dashboard.html" class="logo">FIX<span>IN</span> <span style="font-size:0.7rem; font-weight:500; opacity:0.7;">Admin</span></a>
+        <nav class="nav-links">
+          <a href="admin-dashboard.html">Dashboard</a>
+          <a href="admin-orders.html">Pesanan</a>
+          <a href="admin-products.html">Produk</a>
+          <a href="admin-reports.html" class="active">Laporan</a>
+        </nav>
+        <a href="#" id="logoutBtn" class="btn btn-outline">Keluar<span class="admin-welcome-wrap"> (<span id="adminWelcome">Admin</span>)</span></a>
+        <button class="nav-toggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <section class="admin-content">
+      <div class="container">
+        <a href="admin-dashboard.html" class="back-btn back-btn-dark" onclick="return goBack('admin-dashboard.html')">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Kembali ke Dashboard
+        </a>
+        <div class="admin-page-head">
+          <div>
+            <span class="eyebrow">Laporan</span>
+            <h1>Laporan Transaksi</h1>
+            <p>Rekap transaksi berdasarkan periode, lengkap dengan export ke Excel.</p>
+          </div>
+          <button type="button" class="btn btn-teal" id="exportReportBtn">Export Excel</button>
+        </div>
+
+        <div class="report-filters">
+          <div class="field">
+            <label for="reportPeriodeSelect">Periode</label>
+            <select id="reportPeriodeSelect">
+              <option value="hari">Hari</option>
+              <option value="minggu">Minggu</option>
+              <option value="bulan" selected>Bulan</option>
+              <option value="tahun">Tahun</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="reportRefDateInput">Tanggal Referensi</label>
+            <input type="date" id="reportRefDateInput" />
+          </div>
+        </div>
+
+        <p class="report-period-range">
+          Menampilkan periode: <strong id="reportRangeLabel">-</strong>
+        </p>
+
+        <div class="stat-cards stat-cards-5">
+          <div class="stat-card">
+            <div class="stat-label">Jumlah Transaksi</div>
+            <div class="stat-value" id="reportStatTransaksi">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Omzet Total</div>
+            <div class="stat-value" id="reportStatOmzet">Rp 0</div>
+          </div>
+          <div class="stat-card stat-done">
+            <div class="stat-label">Transaksi Lunas</div>
+            <div class="stat-value" id="reportStatLunas">0</div>
+          </div>
+          <div class="stat-card stat-active">
+            <div class="stat-label">Pending / Gagal</div>
+            <div class="stat-value" id="reportStatPendingGagal">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Layanan Terjual</div>
+            <div class="stat-value" id="reportStatLayanan">0</div>
+          </div>
+        </div>
+
+        <div class="section-title-row">
+          <h2>Rekap per Layanan</h2>
+        </div>
+
+        <div class="admin-table-wrap report-service-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Nama Layanan</th>
+                <th>Jumlah Terjual</th>
+                <th>Omzet (Lunas)</th>
+              </tr>
+            </thead>
+            <tbody id="reportServiceTableBody"></tbody>
+          </table>
+          <p class="admin-table-empty" id="reportServiceEmptyState" style="display:none;">Belum ada layanan terjual pada periode ini.</p>
+        </div>
+
+        <div class="section-title-row">
+          <h2>Detail Transaksi</h2>
+        </div>
+
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Kode Servis</th>
+                <th>Tanggal Transaksi</th>
+                <th>Customer</th>
+                <th>Layanan</th>
+                <th>Metode</th>
+                <th>Status Pembayaran</th>
+                <th>Status Servis</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody id="reportTableBody"></tbody>
+          </table>
+          <p class="admin-table-empty" id="reportEmptyState" style="display:none;">Tidak ada transaksi pada periode ini.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="toast" id="toast"></div>
+
+  </div>
+
+  <!-- xlsx-js-style: fork SheetJS yang bisa nulis styling (bold/warna/border) ke .xlsx.
+       Kalau CDN ini gagal dimuat, otomatis fallback ke SheetJS polos (tanpa styling)
+       supaya fitur export tetap jalan. -->
+  <script src="https://unpkg.com/xlsx-js-style@1.2.0/dist/xlsx.bundle.js"
+    onerror="this.onerror=null;var s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';document.head.appendChild(s);"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/reports.js"></script>
+</body>
+</html>

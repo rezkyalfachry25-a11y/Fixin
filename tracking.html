@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lacak Servis - FIXIN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">FIX<span>IN</span></a>
+      <nav class="nav-links">
+        <a href="index.html">Beranda</a>
+        <a href="index.html#layanan">Layanan</a>
+        <a href="booking.html">Booking</a>
+        <a href="tracking.html" class="active">Lacak Servis</a>
+        <a href="index.html#tentang">Tentang</a>
+      </nav>
+      <span class="nav-auth" id="navAuthArea"></span>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <section class="page-header">
+    <div class="container">
+      <div class="page-header-back">
+        <a href="index.html" class="back-btn" onclick="return goBack('index.html')">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Kembali
+          </a>
+      </div>
+      <h1>Lacak Status Servis</h1>
+      <p>Masukkan kode servis yang kamu dapat setelah booking.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="form-card">
+        <form id="trackingForm">
+          <div class="field" style="margin-bottom: 18px;">
+            <label for="trackingInput">Kode Servis</label>
+            <input type="text" id="trackingInput" name="kode" placeholder="Contoh: FX-1234" required />
+          </div>
+          <button type="submit" class="btn btn-teal btn-block">Cek Status</button>
+        </form>
+
+        <p id="trackingNotFound" style="display:none; margin-top:18px; color:#c0392b;">
+          Kode servis tidak ditemukan. Pastikan kode sudah benar.
+        </p>
+      </div>
+
+      <div class="tracking-result" id="trackingResult">
+        <div class="tracking-card">
+          <h3>Kode Servis: <span class="code" id="resKode"></span></h3>
+          <p style="margin-top:6px;">Atas nama: <strong id="resNama"></strong></p>
+          <p>Layanan: <span id="resLayanan"></span> &middot; Tanggal: <span id="resTanggal"></span></p>
+          <p class="hidden"><strong>Metode:</strong> <span id="resMetode"></span></p>
+          <p class="status-note hidden"><strong>Status servis:</strong> <span id="resStatusLabel"></span></p>
+
+          <div class="timeline">
+            <div class="timeline-step" id="step-diterima">
+              <div class="dot"></div>
+              <span>Diterima</span>
+            </div>
+            <div class="timeline-step" id="step-diproses">
+              <div class="dot"></div>
+              <span>Diproses</span>
+            </div>
+            <div class="timeline-step" id="step-selesai">
+              <div class="dot"></div>
+              <span>Selesai</span>
+            </div>
+          </div>
+
+          <button type="button" id="simulateStatus" class="btn btn-outline-dark" style="margin-top:28px;">
+            Update Status (Simulasi Demo)
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        &copy; 2026 FIXIN. lorem ipsum dolor sit amet.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/tracking.js"></script>
+</body>
+</html>

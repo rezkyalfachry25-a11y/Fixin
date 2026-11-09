@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kelola Produk - Admin FIXIN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+
+  <div id="adminProductsPage">
+
+    <header class="navbar admin-topbar">
+      <div class="container">
+        <a href="admin-dashboard.html" class="logo">FIX<span>IN</span> <span style="font-size:0.7rem; font-weight:500; opacity:0.7;">Admin</span></a>
+        <nav class="nav-links">
+          <a href="admin-dashboard.html">Dashboard</a>
+          <a href="admin-orders.html">Pesanan</a>
+          <a href="admin-products.html" class="active">Produk</a>
+          <a href="admin-reports.html">Laporan</a>
+        </nav>
+        <a href="#" id="logoutBtn" class="btn btn-outline">Keluar<span class="admin-welcome-wrap"> (<span id="adminWelcome">Admin</span>)</span></a>
+        <button class="nav-toggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <section class="admin-content">
+      <div class="container">
+        <a href="admin-dashboard.html" class="back-btn back-btn-dark" onclick="return goBack('admin-dashboard.html')">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Kembali ke Dashboard
+        </a>
+        <div class="admin-page-head">
+          <div>
+            <span class="eyebrow">Manajemen Produk</span>
+            <h1>Layanan / Produk</h1>
+            <p>Kelola katalog layanan yang tampil di halaman publik. Produk nonaktif tidak akan muncul di katalog.</p>
+          </div>
+          <button type="button" id="openCreateModal" class="btn btn-teal">+ Tambah Produk</button>
+        </div>
+
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Nama</th>
+                <th>Kategori</th>
+                <th>Harga</th>
+                <th>Estimasi</th>
+                <th>Status</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="productsTableBody"></tbody>
+          </table>
+          <p class="admin-table-empty" id="productsEmptyState" style="display:none;">Belum ada produk. Klik "Tambah Produk" untuk mulai isi katalog.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal create/edit produk -->
+    <div class="modal-backdrop" id="productModalBackdrop">
+      <div class="modal-card">
+        <div class="modal-head">
+          <h3 id="productModalTitle">Tambah Produk</h3>
+          <button type="button" class="modal-close" id="closeProductModal" aria-label="Tutup">&times;</button>
+        </div>
+
+        <p class="form-alert" id="productFormError"></p>
+
+        <form id="productForm" novalidate>
+          <input type="hidden" id="productId" />
+
+          <div class="field" style="margin-bottom: 16px;">
+            <label for="productName">Nama Layanan</label>
+            <input type="text" id="productName" required />
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="productCategory">Kategori</label>
+              <select id="productCategory" required>
+                <option value="HP">HP</option>
+                <option value="Laptop">Laptop</option>
+                <option value="Tablet">Tablet</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="productEstimatedTime">Estimasi Waktu</label>
+              <input type="text" id="productEstimatedTime" placeholder="Contoh: 1-2 hari" required />
+            </div>
+          </div>
+
+          <div class="field" style="margin-bottom: 16px;">
+            <label for="productDescription">Deskripsi</label>
+            <textarea id="productDescription" required></textarea>
+          </div>
+
+          <div class="field" style="margin-bottom: 8px;">
+            <label for="productPrice">Harga (Rp)</label>
+            <input type="number" id="productPrice" min="0" step="1000" required />
+          </div>
+
+          <label class="checkbox-field">
+            <input type="checkbox" id="productActive" checked />
+            Aktif (tampil di katalog)
+          </label>
+
+          <div class="modal-actions">
+            <button type="button" class="btn btn-outline-dark" id="cancelProductForm">Batal</button>
+            <button type="submit" class="btn btn-teal">Simpan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Modal konfirmasi hapus -->
+    <div class="modal-backdrop" id="deleteModalBackdrop">
+      <div class="modal-card modal-card-sm">
+        <h3>Hapus Produk?</h3>
+        <p style="margin-top:10px; color:var(--text-muted); font-size:0.92rem;">
+          Yakin ingin menghapus <strong id="deleteProductName"></strong>? Tindakan ini tidak bisa dibatalkan.
+        </p>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-outline-dark" id="cancelDelete">Batal</button>
+          <button type="button" class="btn btn-danger" id="confirmDelete">Hapus</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+  </div>
+
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/products.js"></script>
+</body>
+</html>

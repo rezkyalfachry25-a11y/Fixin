@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Layanan - FIXIN</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">FIX<span>IN</span></a>
+      <nav class="nav-links">
+        <a href="index.html">Beranda</a>
+        <a href="services.html" class="active">Layanan</a>
+        <a href="booking.html">Booking</a>
+        <a href="tracking.html">Lacak Servis</a>
+        <a href="about.html">Tentang</a>
+      </nav>
+      <span class="nav-auth" id="navAuthArea"></span>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <section class="page-header">
+    <div class="container">
+      <div class="page-header-back">
+        <a href="index.html" class="back-btn" onclick="return goBack('index.html')">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Kembali
+          </a>
+      </div>
+      <h1>Layanan Servis Kami</h1>
+      <p>Pilihan layanan servis untuk HP, laptop, dan tablet.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="service-grid" id="catalogGrid">
+        <!-- Diisi otomatis dari fixin_products (produk aktif saja) lewat js/products.js -->
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <span class="footer-logo">FIX<span style="color:#17b3a3">IN</span></span>
+          <p>Layanan servis laptop dan HP dengan proses cepat, transparan, dan bergaransi.</p>
+        </div>
+        <div>
+          <h4>Halaman</h4>
+          <ul>
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="services.html">Layanan</a></li>
+            <li><a href="booking.html">Booking</a></li>
+            <li><a href="tracking.html">Lacak Servis</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Layanan</h4>
+          <ul>
+            <li><a href="services.html">Servis HP</a></li>
+            <li><a href="services.html">Servis Laptop</a></li>
+            <li><a href="services.html">Servis Tablet</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Kontak</h4>
+          <ul>
+            <li>WhatsApp: 0812-3456-7890</li>
+            <li>Email: halo@fixin.id</li>
+            <li>Jam operasional: 09.00 - 20.00</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 FIXIN. Tugas Digital Entrepreneur.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/utils.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
